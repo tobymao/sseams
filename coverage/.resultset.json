@@ -1,0 +1,140 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/toby/dev/sseams/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/toby/dev/sseams/app/controllers/application_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/controllers/users_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/company.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/employee.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/item.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/item_addon.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/item_variant.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/order.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/order_item.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/payment_profile.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/profile.rb": [
+        0,
+        0
+      ],
+      "/Users/toby/dev/sseams/app/models/user.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "timestamp": 1450078798
+  }
+}

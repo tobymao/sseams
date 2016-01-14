@@ -1,0 +1,35 @@
+@import 'styles';
+
+.items {
+  text-align: center;
+  font-size: 16px;
+
+  .title {
+    margin-bottom: 42px;
+  }
+
+  .btn {
+    margin-top: 40px;
+    width: 362px;
+    height: 78px;
+  }
+
+  .container {
+    .base {
+      display: inline-block;
+      width: 500px;
+      height: 680px;
+      vertical-align: top;
+      text-align: left;
+      padding: 12px 25px 0px 25px;
+    }
+
+    .left {
+      @extend .base;
+    }
+
+    .right {
+      @extend .base;
+    }
+  }
+}

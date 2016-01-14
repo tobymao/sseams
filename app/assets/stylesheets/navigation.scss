@@ -1,0 +1,28 @@
+@import 'styles';
+
+.navigation {
+  background-color: white;
+
+  margin-top: 40px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+
+  .links {
+    display: inline-block;
+    float: right;
+    margin-top: 12.8px;
+  }
+
+  .logo {
+    display: inline-block;
+
+    a {
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 30px;
+      line-height: 40px;
+      color: $gray1;
+      margin-left: 40px;
+    }
+  }
+}
