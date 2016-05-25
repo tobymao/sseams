@@ -47,21 +47,11 @@ class SSeams < Roda
   plugin :cookies
   plugin :status_handler
 
-  status_handler 403 do
-    'You are forbidden from seeing that!'
-  end
-
   status_handler 404 do
     "Uh oh, there doesn't seem to be anything here."
   end
 
   route do |r|
-    Views::Base.delegate = self
-
-    token = request.cookies['auth_token']
-    session = Session.where(token: token).first
-    current_user = session.user if session&.valid?
-
     r.root do
       widget Views::Home
     end
@@ -88,30 +78,43 @@ class SSeams < Roda
         }
 
         user = User.create params
-        login_user user, r
+        login_user user
       end
     end
   end
 
-  def return_to r
+  def return_to
     url = session[:return_to] || '/'
     session[:return_to] = nil
-    r.redirect url
+    request.redirect url
   end
 
-  def login_user user, r
+  def current_user
+    @current_user ||=
+      begin
+        token = request.cookies['auth_token']
+        session = Session.where(token: token).first
+        user = session.user if session&.valid?
+        user
+      end
+  end
+
+  def login_user user
     s = Session.create token: SecureRandom.hex, user: user
 
-    r.response.set_cookie 'auth_token', {
+    request.response.set_cookie 'auth_token', {
       value: s.token,
       expires: Time.now + Session::EXPIRE_TIME,
       domain: nil, # look into doing this correctly for prod
     }
 
-    return_to r
+    return_to
   end
 
   def widget klass, needs = {}
+    needs[:csrf_tag] ||= csrf_tag
+    needs[:request] ||= request
+    needs[:current_user] ||= current_user
     klass.new(**needs).to_html
   end
 end

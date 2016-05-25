@@ -20,7 +20,11 @@ module Views
         right: '0.2em',
       )
 
-      a 'Login', href: '/signup', style: login_style
+      if current_user
+        a current_user.name, href: '/', style: login_style
+      else
+        a 'Login', href: '/signup', style: login_style
+      end
     end
 
   end
