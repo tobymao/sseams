@@ -22,10 +22,14 @@ module Views
 
       if current_user
         a current_user.name, href: '/', style: login_style
+
+        form action: '/logout', method: 'post' do
+          rawtext csrf_tag
+          input type: 'submit', value: 'Logout'
+        end
       else
         a 'Login', href: '/signup', style: login_style
       end
     end
-
   end
 end

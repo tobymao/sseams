@@ -13,8 +13,12 @@ module Views
 
       form action: path, method: 'post' do
         rawtext csrf_tag
-        input type: 'text', name: 'name', placeholder: 'Name'
-        br
+
+        if create
+          input type: 'text', name: 'name', placeholder: 'Name'
+          br
+        end
+
         input type: 'text', name: 'email', placeholder: 'Email'
         br
         input type: 'password', name: 'password'
@@ -22,6 +26,5 @@ module Views
         input type: 'submit', value: create ? 'Create Account' : 'Sign In'
       end
     end
-
   end
 end

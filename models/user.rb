@@ -2,6 +2,8 @@ require './models/base'
 
 class User < Base
   one_to_many :session
+  one_to_one :measurement
+  one_to_one :address
 
   def validate
     super

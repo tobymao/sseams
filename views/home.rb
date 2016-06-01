@@ -7,17 +7,20 @@ module Views
     end
 
     def render_steps
+      link_style = inline(
+        display: 'block',
+      )
+
       div style: inline(text_align: 'center') do
-        box'/images/measure.svg', 'Submit Your Measurements', 'we tell you what to do'
-        box'/images/photos.svg', 'Upload Your Pictures', 'so we get the nuances in your shirt'
-        box'/images/fabric.svg', 'Pick Your Fabric', 'and look great for any occassion'
+        box 'Submit Your Measurements', 'we tell you what to do'
+        box 'Upload Your Pictures', 'so we get the nuances in your shirt'
+        box 'Pick Your Fabric', 'and look great for any occassion'
+        a 'Get Started', href: '/measurements', style: link_style
       end
     end
 
-    def box(path, t1, t2)
+    def box t1, t2
       div style: inline(display: 'inline-block') do
-        img src: path
-
         div style: inline(font_size: '20px') do
           text t1
         end

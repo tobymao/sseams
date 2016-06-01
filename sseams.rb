@@ -60,17 +60,37 @@ class SSeams < Roda
       widget Views::Login, create: true
     end
 
+    r.on 'measurements' do
+      r.get do
+        if current_user
+          widget Views::Measurements
+        else
+          session[:return_to] = '/measurements'
+          widget Views::Login
+        end
+      end
+    end
+
     r.on 'login' do
       r.get do
         widget Views::Login
       end
 
-      r.is method: 'post' do
+      r.post do
+        user = User.where(email: r['email']).first
+        redirect '/login' unless user
+        login_user user
       end
     end
 
+    r.is 'logout', method: 'post' do
+      r.redirect '/' unless current_user
+      request.response.set_cookie 'auth_token', nil
+      return_to
+    end
+
     r.on 'user' do
-      r.is method: 'post' do
+      r.post do
         params = {
           name: r['name'],
           email: r['email'],
