@@ -8,7 +8,6 @@ class Session < Base
   def validate
     super
     validates_presence [:token, :user_id]
-    validates_unique :user_id
   end
 
   def valid?

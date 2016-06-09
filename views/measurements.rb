@@ -2,8 +2,10 @@ require './views/page'
 
 module Views
   class Measurements < Page
+    needs :measurement
+
     def render_main
-      form action: '/measurements', method: 'post' do
+      form action: '/measurements', method: 'post', enctype: 'multipart/form-data' do
         rawtext csrf_tag
         render_measurements
         render_uploads
@@ -12,17 +14,17 @@ module Views
     end
 
     def render_measurements
-      input type: 'number', name: 'feet', placeholder: 'feet'
-      input type: 'number', name: 'inches', placeholder: 'feet'
-      input type: 'number', name: 'weight', placeholder: 'lbs'
-      input type: 'number', name: 'neck', placeholder: 'Section 1'
-      input type: 'number', name: 'back', placeholder: 'Section 2'
-      input type: 'number', name: 'chest', placeholder: 'Section 3'
-      input type: 'number', name: 'shoulder', placeholder: 'Section 4'
-      input type: 'number', name: 'waist', placeholder: 'Section 5'
-      input type: 'number', name: 'arm', placeholder: 'Section 6'
-      input type: 'number', name: 'butt', placeholder: 'Section 7'
-      input type: 'number', name: 'wrist', placeholder: 'Section 8'
+      input type: 'number', name: 'feet', placeholder: 'feet', value: feet
+      input type: 'number', name: 'inches', placeholder: 'inches', value: inches
+      input type: 'number', name: 'weight', placeholder: 'lbs', value: measurement&.weight
+      input type: 'number', name: 'neck', placeholder: 'neck', value: measurement&.neck
+      input type: 'number', name: 'back', placeholder: 'back', value: measurement&.back
+      input type: 'number', name: 'chest', placeholder: 'chest', value: measurement&.chest
+      input type: 'number', name: 'shoulder', placeholder: 'shoulder', value: measurement&.shoulder
+      input type: 'number', name: 'waist', placeholder: 'waist', value: measurement&.waist
+      input type: 'number', name: 'arm', placeholder: 'arm', value: measurement&.arm
+      input type: 'number', name: 'butt', placeholder: 'butt', value: measurement&.butt
+      input type: 'number', name: 'wrist', placeholder: 'wrist', value: measurement&.wrist
     end
 
     def render_uploads
@@ -32,7 +34,15 @@ module Views
     end
 
     def upload_box position
-      input type: 'file', name: position
+      input type: 'file', name: "#{position}_image", value: position
+    end
+
+    def feet
+      (measurement&.height || 0).to_i / 12
+    end
+
+    def inches
+      (measurement&.height || 0).to_i % 12
     end
   end
 end

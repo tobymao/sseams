@@ -10,6 +10,7 @@ gem 'shrine'
 gem 'roda-basic-auth'
 gem 'rake'
 gem 'bcrypt'
+gem 'mail'
 
 group :development, :test do
   # deploy

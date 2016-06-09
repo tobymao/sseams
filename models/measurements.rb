@@ -1,6 +1,11 @@
 require './models/base'
+require './uploaders/measurement_uploader'
 
 class Measurement < Base
+  include MeasurementUploader[:front_image]
+  include MeasurementUploader[:back_image]
+  include MeasurementUploader[:side_image]
+
   one_to_one :user
 
   def validate

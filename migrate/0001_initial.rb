@@ -34,6 +34,9 @@ Sequel.migration do
       Real :arm, null: false
       Real :butt, null: false
       Real :wrist, null: false
+      String :front_image_data
+      String :back_image_data
+      String :side_image_data
       foreign_key :user_id, :users, null: false, index: true, on_delete: :cascade
 
       DateTime :created_at, null: false

@@ -46,6 +46,7 @@ class SSeams < Roda
   plugin :basic_auth
   plugin :cookies
   plugin :status_handler
+  plugin :mailer
 
   status_handler 404 do
     "Uh oh, there doesn't seem to be anything here."
@@ -58,17 +59,6 @@ class SSeams < Roda
 
     r.is 'signup' do
       widget Views::Login, create: true
-    end
-
-    r.on 'measurements' do
-      r.get do
-        if current_user
-          widget Views::Measurements
-        else
-          session[:return_to] = '/measurements'
-          widget Views::Login
-        end
-      end
     end
 
     r.on 'login' do
@@ -101,6 +91,102 @@ class SSeams < Roda
         login_user user
       end
     end
+
+    r.on 'measurements' do
+      authenticate '/measurements'
+
+      measurement = current_user.measurement
+
+      r.get do
+        widget Views::Measurements, measurement: measurement
+      end
+
+      r.post do
+        height = r['feet'].to_i * 12 + r['inches'].to_i
+
+        params = {
+          height: height,
+          weight: r['weight'],
+          neck: r['neck'],
+          back: r['back'],
+          chest: r['chest'],
+          shoulder: r['shoulder'],
+          waist: r['waist'],
+          arm: r['arm'],
+          butt: r['butt'],
+          wrist: r['wrist'],
+          front_image: r['front_image'],
+          back_image: r['back_image'],
+          side_image: r['side_image'],
+        }
+
+        if measurement
+          measurement.update params
+        else
+          params[:user_id] = current_user.id
+          measurement = Measurement.create params
+        end
+
+        r.redirect '/shirts'
+      end
+    end
+
+    r.on 'shirts' do
+      authenticate '/shirts'
+
+      r.get do
+        widget Views::Shirts
+      end
+
+      r.post do
+        session[:cart] = r.params.select do |k, v|
+          v.to_i > 0
+        end
+
+        r.redirect '/shipping'
+      end
+    end
+
+    r.on 'shipping' do
+      authenticate '/shipping'
+      address = current_user.address
+
+      r.get do
+        widget Views::Shipping
+      end
+
+      r.post do
+        params = {
+          name: r['name'],
+          street: r['street'],
+          city: r['city'],
+          state: r['state'],
+          zip: r['zip'],
+        }
+
+        if address
+          address.update params
+        else
+          params[:user_id] = current_user.id
+          address = Address.create params
+        end
+
+        self.class.sendmail '/order', address
+
+        r.redirect '/complete'
+      end
+    end
+
+    r.on 'complete' do
+      widget Views::Complete
+    end
+
+    r.mail 'order' do |address|
+      from 'orders@sevenseam.com'
+      to 'toby.mao@gmail.com'
+      subject 'Seven Seams Order Received'
+      address.to_json
+    end
   end
 
   def return_to
@@ -129,6 +215,13 @@ class SSeams < Roda
     }
 
     return_to
+  end
+
+  def authenticate path
+    unless current_user
+      session[:return_to] = path
+      request.redirect '/login'
+    end
   end
 
   def widget klass, needs = {}
