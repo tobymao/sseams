@@ -21,9 +21,17 @@ module Views
 
         input type: 'text', name: 'email', placeholder: 'Email'
         br
-        input type: 'password', name: 'password'
+        input type: 'password', name: 'password', placeholder: 'Password'
         br
         input type: 'submit', value: create ? 'Create Account' : 'Sign In'
+      end
+
+      if create
+        label 'Already have an account?'
+        a 'Login', href: '/login'
+      else
+        label 'Sign up for an account'
+        a 'Sign up', href: '/signup'
       end
     end
   end

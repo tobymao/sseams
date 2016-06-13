@@ -14,17 +14,17 @@ module Views
     end
 
     def render_measurements
-      input type: 'number', name: 'feet', placeholder: 'feet', value: feet
-      input type: 'number', name: 'inches', placeholder: 'inches', value: inches
-      input type: 'number', name: 'weight', placeholder: 'lbs', value: measurement&.weight
-      input type: 'number', name: 'neck', placeholder: 'neck', value: measurement&.neck
-      input type: 'number', name: 'back', placeholder: 'back', value: measurement&.back
-      input type: 'number', name: 'chest', placeholder: 'chest', value: measurement&.chest
-      input type: 'number', name: 'shoulder', placeholder: 'shoulder', value: measurement&.shoulder
-      input type: 'number', name: 'waist', placeholder: 'waist', value: measurement&.waist
-      input type: 'number', name: 'arm', placeholder: 'arm', value: measurement&.arm
-      input type: 'number', name: 'butt', placeholder: 'butt', value: measurement&.butt
-      input type: 'number', name: 'wrist', placeholder: 'wrist', value: measurement&.wrist
+      input type: 'number', step: 0.5, name: 'feet', placeholder: 'feet', value: feet
+      input type: 'number', step: 0.5, name: 'inches', placeholder: 'inches', value: inches
+      input type: 'number', step: 0.5, name: 'weight', placeholder: 'lbs', value: measurement&.weight
+      input type: 'number', step: 0.5, name: 'neck', placeholder: 'neck', value: measurement&.neck
+      input type: 'number', step: 0.5, name: 'back', placeholder: 'back', value: measurement&.back
+      input type: 'number', step: 0.5, name: 'chest', placeholder: 'chest', value: measurement&.chest
+      input type: 'number', step: 0.5, name: 'shoulder', placeholder: 'shoulder', value: measurement&.shoulder
+      input type: 'number', step: 0.5, name: 'waist', placeholder: 'waist', value: measurement&.waist
+      input type: 'number', step: 0.5, name: 'arm', placeholder: 'arm', value: measurement&.arm
+      input type: 'number', step: 0.5, name: 'butt', placeholder: 'butt', value: measurement&.butt
+      input type: 'number', step: 0.5, name: 'wrist', placeholder: 'wrist', value: measurement&.wrist
     end
 
     def render_uploads
