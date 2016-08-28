@@ -1,1 +1,1 @@
-server 'www.boardgameblitz.com', user: 'deploy', roles: %w{web app db}
+server 'www.7seams.com', user: 'deploy', roles: %w{web app db}

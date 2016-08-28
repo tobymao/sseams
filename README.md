@@ -1,3 +1,3 @@
-Website for Board Game Blitz.
+Website for Seven Seams
 
-www.boardgameblitz.com
+www.7seams.com

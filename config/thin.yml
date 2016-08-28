@@ -1,16 +1,16 @@
 ---
-chdir: /home/deploy/apps/bg_blitz/current
+chdir: /home/deploy/apps/sseams/current
 environment: production
 address: localhost
-port: 3001
+port: 3002
 timeout: 30
 wait: 30
-log: /home/deploy/apps/bg_blitz/shared/log/thin.log
-pid: /home/deploy/apps/bg_blitz/shared/pids/thin.pid
-socket: /tmp/bg_blitz-thin.sock
+log: /home/deploy/apps/sseams/shared/log/thin.log
+pid: /home/deploy/apps/sseams/shared/pids/thin.pid
+socket: /tmp/sseams-thin.sock
 max_conns: 1024
 max_persistent_conns: 100
 require: []
-servers: 2
+servers: 1
 daemonize: true
 onebyone: true
