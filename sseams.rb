@@ -22,12 +22,18 @@ FOLDERS.each do |folder|
   Dir["./#{folder}/**/*.rb" ].each { |file| require file }
 end
 
-Mail.defaults do
-  delivery_method :smtp, address: '7seams.com', port: 25
-end
-
 unless PRODUCTION
   require 'better_errors'
+end
+
+Mail.defaults do
+  delivery_method(
+    :smtp,
+    domain: 'mistery.io',
+    port: 25,
+    enable_starttls_auto: true,
+    openssl_verify_mode: "none",
+  )
 end
 
 class SSeams < Roda
@@ -176,7 +182,7 @@ class SSeams < Roda
           address = Address.create params
         end
 
-        self.class.sendmail '/order', address
+        self.class.sendmail '/order', current_user, session[:cart].tap { |h| h.delete("_csrf") }
 
         r.redirect '/complete'
       end
@@ -186,11 +192,16 @@ class SSeams < Roda
       widget Views::Complete
     end
 
-    r.mail 'order' do |address|
-      from 'orders@sevenseam.com'
-      to 'toby.mao@gmail.com'
+    r.mail 'order' do |user, cart|
+      from 'orders@7seams.com'
+      to 'tyson.mao@gmail.com'
       subject 'Seven Seams Order Received'
-      address.to_json
+      <<~BODY
+        Name: #{user.name}
+        Email: #{user.email}
+        Address: #{user.address.to_json}
+        Order: #{cart.to_json}
+      BODY
     end
   end
 
