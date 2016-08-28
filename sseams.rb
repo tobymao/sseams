@@ -6,6 +6,7 @@ require 'shrine'
 require 'bcrypt'
 require "shrine/storage/file_system"
 require './models.rb'
+require 'mail'
 
 Shrine.plugin :sequel
 Shrine.plugin :rack_file
@@ -19,6 +20,10 @@ FOLDERS = %w[views models uploaders]
 
 FOLDERS.each do |folder|
   Dir["./#{folder}/**/*.rb" ].each { |file| require file }
+end
+
+Mail.defaults do
+  delivery_method :smtp, address: '7seams.com', port: 25
 end
 
 unless PRODUCTION

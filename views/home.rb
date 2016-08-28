@@ -8,24 +8,32 @@ module Views
 
     def render_steps
       link_style = inline(
+        margin_top: '1em',
         display: 'block',
       )
 
       div style: inline(text_align: 'center') do
+        h1  do
+          text 'HOW IT WORKS'
+        end
+
         box 'Submit Your Measurements', 'we tell you what to do'
         box 'Upload Your Pictures', 'so we get the nuances in your shirt'
-        box 'Pick Your Fabric', 'and look great for any occassion'
-        a 'Get Started', href: '/measurements', style: link_style
+        box 'Pick Your Fabric', 'look great for any occassion'
+
+        br; br
+
+        a 'Get Started', href: '/measurements', style: inline(margin_top: '1em')
       end
     end
 
     def box t1, t2
-      div style: inline(display: 'inline-block') do
-        div style: inline(font_size: '20px') do
+      div style: inline(display: 'inline-block', margin_right: '1em') do
+        h2 do
           text t1
         end
 
-        div do
+        div style: inline(font_size: '0.8em') do
           text t2
         end
       end

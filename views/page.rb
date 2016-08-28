@@ -15,7 +15,7 @@ module Views
         end
 
         div style: inline(min_height: '95%') do
-          div class: 'container' do
+          div style: inline(margin_bottom: '3em'), class: 'container' do
             render_banner
           end
 
@@ -40,14 +40,15 @@ module Views
         }
 
         h1 {
-          font-size: 2em;
+          font-size: 2.5em;
+          font-weight: bold;
           margin-bottom: 0.3em;
           line-height: 1em;
         }
 
         h2 {
-          font-weight: bold ;
-          font-size: 0.8em;
+          font-weight: bold;
+          font-size: 1.3em;
           margin-bottom: 1em;
         }
 
@@ -57,6 +58,19 @@ module Views
           margin: 0 auto;
           text-align: justify;
           max-width: #{MAX_W};
+        }
+
+        a {
+          color: black;
+          border:1px solid black;
+          text-decoration: none;
+        }
+
+        input[type=submit] {
+          background: none;
+          border:1px solid black;
+          cursor: pointer;
+          font-size: 1em;
         }
       CSS
     end
@@ -79,15 +93,6 @@ module Views
 
       div style: footer_style do
         rawtext '&copy; Seven Seams 2016.'
-
-        ls = inline(margin: '0.5em', text_decoration: 'none')
-
-        div do
-          a 'About', href: '/about', style: ls
-          a 'Contact', href: '/contact', style: ls
-          a 'Podcasts', href: '/podcasts', style: ls
-          a 'Videos', href: '/videos', style: ls
-        end
       end
     end
   end

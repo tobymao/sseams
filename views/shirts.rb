@@ -12,8 +12,9 @@ module Views
       form action: '/shirts', method: 'post' do
         rawtext csrf_tag
         render_shirts
+        br
         a 'Back', href: '/measurements'
-        input type: 'submit', value: 'Next'
+        input type: 'submit', value: 'Next', style: inline(margin_left: '1em')
       end
     end
 
@@ -24,7 +25,7 @@ module Views
             name = "#{i}#{type[0]}"
             text name
 
-            select name: name do
+            select name: name, style: inline(margin_left: '3em') do
               (0..5).each do |num|
                 hash = { value: num }
                 hash[:selected] = true if num == 0
@@ -33,6 +34,7 @@ module Views
                 end
               end
             end
+            br
 
           end
         end

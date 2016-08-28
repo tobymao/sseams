@@ -23,15 +23,16 @@ module Views
         br
         input type: 'password', name: 'password', placeholder: 'Password'
         br
-        input type: 'submit', value: create ? 'Create Account' : 'Sign In'
-      end
+        br
+        input type: 'submit', value: create ? 'Create Account' : 'Login'
 
-      if create
-        label 'Already have an account?'
-        a 'Login', href: '/login'
-      else
-        label 'Sign up for an account'
-        a 'Sign up', href: '/signup'
+        link_style = inline(margin_left: '1em')
+
+        if create
+          a 'Login', href: '/login', style: link_style
+        else
+          a 'Sign up', href: '/signup', style: link_style
+        end
       end
     end
   end
